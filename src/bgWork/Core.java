@@ -9,6 +9,7 @@ import mod.instance.AssociationLine;
 import mod.instance.BasicClass;
 import mod.instance.CompositionLine;
 import mod.instance.GeneralizationLine;
+import mod.instance.DependencyLine;
 import mod.instance.GroupContainer;
 import mod.instance.UseCase;
 
@@ -97,6 +98,11 @@ public class Core extends InitProcess
 	{
 		return obj instanceof GeneralizationLine;
 	}
+	
+	public boolean isDependencyLine(Object obj)
+	{
+		return obj instanceof DependencyLine;
+	}
 
 	public int isLine(Object obj)
 	{
@@ -111,6 +117,10 @@ public class Core extends InitProcess
 		else if (isGeneralizationLine(obj))
 		{
 			return 2;
+		}
+		else if (isDependencyLine(obj))
+		{
+			return 3;
 		}
 		return -1;
 	}
@@ -142,9 +152,13 @@ public class Core extends InitProcess
 		{
 			return 4;
 		}
-		else if (isGroupContainer(obj))
+		else if (isDependencyLine(obj))
 		{
 			return 5;
+		}
+		else if (isGroupContainer(obj))
+		{
+			return 6;
 		}
 		return -1;
 	}
