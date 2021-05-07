@@ -1,8 +1,10 @@
 package mod.instance;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 
@@ -49,7 +51,14 @@ public class DependencyLine extends JPanel
 		tpPrime = new Point(tp.x - this.getLocation().x,
 				tp.y - this.getLocation().y);
 		g.setColor(Color.BLACK);
-		g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
+		
+		// Draw dotted line
+		Graphics2D g2d=(Graphics2D)g;
+		float [] f = {10f,10f};
+		BasicStroke bs = new BasicStroke(1,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND,10.0F,f,0f);
+		g2d.setStroke(bs);
+		
+		g2d.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		paintArrow(g, tpPrime);
 		if (isSelect == true)
 		{
@@ -75,6 +84,27 @@ public class DependencyLine extends JPanel
 		{point.x, point.x - arrowSize, point.x, point.x + arrowSize};
 		int y[] =
 		{point.y + arrowSize, point.y, point.y - arrowSize, point.y};
+		switch (toSide)
+		{
+			case 0:
+				x = removeAt(x, 0);
+				y = removeAt(y, 0);
+				break;
+			case 1:
+				x = removeAt(x, 1);
+				y = removeAt(y, 1);
+				break;
+			case 2:
+				x = removeAt(x, 3);
+				y = removeAt(y, 3);
+				break;
+			case 3:
+				x = removeAt(x, 2);
+				y = removeAt(y, 2);
+				break;
+			default:
+				break;
+		}
 		Polygon polygon = new Polygon(x, y, x.length);
 		g.setColor(Color.WHITE);
 		g.fillPolygon(polygon);
@@ -95,6 +125,7 @@ public class DependencyLine extends JPanel
 		renewConnect();
 		System.out.println("from side " + fromSide);
 		System.out.println("to side " + toSide);
+		;
 	}
 
 	void renewConnect()
@@ -140,6 +171,23 @@ public class DependencyLine extends JPanel
 		{
 			temp = null;
 			System.err.println("getConnectPoint fail:" + side);
+		}
+		return temp;
+	}
+
+	int[] removeAt(int arr[], int index)
+	{
+		int temp[] = new int[arr.length - 1];
+		for (int i = 0; i < temp.length; i ++)
+		{
+			if (i < index)
+			{
+				temp[i] = arr[i];
+			}
+			else if (i >= index)
+			{
+				temp[i] = arr[i + 1];
+			}
 		}
 		return temp;
 	}
