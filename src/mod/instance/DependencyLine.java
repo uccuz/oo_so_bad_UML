@@ -17,7 +17,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
-public class DependencyLine extends Line
+public class DependencyLine extends JPanel
 		implements IFuncComponent, ILinePainter
 {
 	JPanel				from;
@@ -60,11 +60,46 @@ public class DependencyLine extends Line
 		
 		g2d.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		paintArrow(g, tpPrime);
+		
+		// drawHighlight
+		if(checkHighlight(fpPrime,tpPrime)) {
+			g2d.setStroke(new BasicStroke(3));
+			g2d.setColor(new Color(245, 245, 66, 160));
+			g2d.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
+		}
+		
 		if (isSelect == true)
 		{
 			paintSelect(g);
 		}
 	}
+	
+	private boolean checkHighlight(Point fpPrime, Point tpPrime) {
+		if( from instanceof BasicClass) {
+			if(((BasicClass) from).getSelectPort() == fromSide) {
+				return true;
+			}
+		}
+		if( to instanceof BasicClass) {
+			if(((BasicClass) to).getSelectPort() == toSide) {
+				return true;
+			}
+		}
+		if( from instanceof UseCase) {
+			if(((UseCase) from).getSelectPort() == fromSide) {
+				return true;
+			}
+		}
+		if( to instanceof UseCase) {
+			if(((UseCase) to).getSelectPort() == toSide) {
+				return true;
+			}
+		}
+		
+
+		return false;
+	}
+
 
 	@Override
 	public void reSize()
@@ -209,4 +244,5 @@ public class DependencyLine extends Line
 	{
 		this.isSelect = isSelect;
 	}
+	
 }

@@ -1,8 +1,10 @@
 package mod.instance;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.JPanel;
@@ -14,7 +16,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
-public class AssociationLine extends Line
+public class AssociationLine extends JPanel
 		implements IFuncComponent, ILinePainter
 {
 	JPanel				from;
@@ -47,10 +49,45 @@ public class AssociationLine extends Line
 				tp.y - this.getLocation().y);
 		g.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
 		paintArrow(g, tpPrime);
+		
+		Graphics2D g2d=(Graphics2D)g;
+		// drawHighlight
+		if(checkHighlight(fpPrime,tpPrime)) {
+			g2d.setStroke(new BasicStroke(3));
+			g2d.setColor(new Color(245, 245, 66, 160));
+			g2d.drawLine(fpPrime.x, fpPrime.y, tpPrime.x, tpPrime.y);
+		}
+		
 		if (isSelect == true)
 		{
 			paintSelect(g);
 		}
+	}
+	
+	private boolean checkHighlight(Point fpPrime, Point tpPrime) {
+		if( from instanceof BasicClass) {
+			if(((BasicClass) from).getSelectPort() == fromSide) {
+				return true;
+			}
+		}
+		if( to instanceof BasicClass) {
+			if(((BasicClass) to).getSelectPort() == toSide) {
+				return true;
+			}
+		}
+		if( from instanceof UseCase) {
+			if(((UseCase) from).getSelectPort() == fromSide) {
+				return true;
+			}
+		}
+		if( to instanceof UseCase) {
+			if(((UseCase) to).getSelectPort() == toSide) {
+				return true;
+			}
+		}
+		
+
+		return false;
 	}
 
 	@Override

@@ -142,13 +142,13 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 			selectPort = 3;
 		}
 		else if(isInsidePort(x,y,this.getWidth() / 2 - selectBoxSize, this.getHeight() - selectBoxSize)) {
-			selectPort = 2;
+			selectPort = 0;
 		}
 		else if(isInsidePort(x,y,0, this.getHeight() / 2 - selectBoxSize)) {
 			selectPort = 1;
 		}
 		else if(isInsidePort(x,y,this.getWidth() - selectBoxSize, this.getHeight() / 2 - selectBoxSize)) {
-			selectPort = 0;
+			selectPort = 2;
 		}
 		else {
 			selectPort = -1;
@@ -164,5 +164,9 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 		if( x >= min_x && x <= max_x && y >= min_y && y <= max_y )
 			return true;
 		return false;
+	}
+	
+	public int getSelectPort() {
+		return selectPort;
 	}
 }
