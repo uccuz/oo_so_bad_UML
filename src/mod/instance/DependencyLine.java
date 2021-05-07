@@ -17,7 +17,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
-public class DependencyLine extends JPanel
+public class DependencyLine extends Line
 		implements IFuncComponent, ILinePainter
 {
 	JPanel				from;

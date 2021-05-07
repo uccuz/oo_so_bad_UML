@@ -15,7 +15,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
-public class CompositionLine extends JPanel
+public class CompositionLine extends Line
 		implements IFuncComponent, ILinePainter
 {
 	JPanel				from;

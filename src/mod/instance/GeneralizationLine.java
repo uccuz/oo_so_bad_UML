@@ -15,7 +15,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
-public class GeneralizationLine extends JPanel
+public class GeneralizationLine extends Line
 		implements IFuncComponent, ILinePainter
 {
 	JPanel				from;

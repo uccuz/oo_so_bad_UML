@@ -14,7 +14,7 @@ import mod.IFuncComponent;
 import mod.ILinePainter;
 import java.lang.Math;
 
-public class AssociationLine extends JPanel
+public class AssociationLine extends Line
 		implements IFuncComponent, ILinePainter
 {
 	JPanel				from;

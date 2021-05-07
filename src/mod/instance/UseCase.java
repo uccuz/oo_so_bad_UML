@@ -3,6 +3,7 @@ package mod.instance;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class UseCase extends JPanel implements IFuncComponent, IClassPainter
 	boolean				isSelect		= false;
 	int					selectBoxSize	= 5;
 	CanvasPanelHandler	cph;
+	protected int selectPort = -1;
 
 	public UseCase(CanvasPanelHandler cph)
 	{
@@ -103,5 +105,10 @@ public class UseCase extends JPanel implements IFuncComponent, IClassPainter
 		gra.fillRect(this.getWidth() - selectBoxSize,
 				this.getHeight() / 2 - selectBoxSize, selectBoxSize,
 				selectBoxSize * 2);
+	}
+
+	public void setHighlight(Point point) {
+		
+		
 	}
 }
