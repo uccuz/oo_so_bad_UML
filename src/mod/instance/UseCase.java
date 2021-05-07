@@ -108,7 +108,35 @@ public class UseCase extends JPanel implements IFuncComponent, IClassPainter
 	}
 
 	public void setHighlight(Point point) {
+
+		int x = point.x - this.getX();
+		int y = point.y - this.getY();
 		
-		
+		if(isInsidePort(x,y, this.getWidth() / 2 - selectBoxSize,0)) {
+			selectPort = 3;
+		}
+		else if(isInsidePort(x,y,this.getWidth() / 2 - selectBoxSize, this.getHeight() - selectBoxSize)) {
+			selectPort = 2;
+		}
+		else if(isInsidePort(x,y,0, this.getHeight() / 2 - selectBoxSize)) {
+			selectPort = 1;
+		}
+		else if(isInsidePort(x,y,this.getWidth() - selectBoxSize, this.getHeight() / 2 - selectBoxSize)) {
+			selectPort = 0;
+		}
+		else {
+			selectPort = -1;
+		}
+		System.out.println(selectPort);
+	}
+	
+	protected boolean isInsidePort(int x,int y,int box_x,int box_y) {
+		int min_x = box_x;
+		int min_y = box_y;
+		int max_x = box_x + selectBoxSize * 2;
+		int max_y = box_y + selectBoxSize;
+		if( x >= min_x && x <= max_x && y >= min_y && y <= max_y )
+			return true;
+		return false;
 	}
 }

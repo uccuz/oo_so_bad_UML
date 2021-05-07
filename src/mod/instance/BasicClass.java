@@ -153,7 +153,7 @@ public class BasicClass extends JPanel implements IFuncComponent, IClassPainter
 		else {
 			selectPort = -1;
 		}
-		//System.out.println(selectPort);
+		System.out.println(selectPort);
 	}
 	
 	protected boolean isInsidePort(int x,int y,int box_x,int box_y) {
